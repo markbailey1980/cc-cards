@@ -100,6 +100,7 @@ const loadClickEvents = (data) => {
         let updatedData = data.slice();
         updatedData.push(formFieldData);
 
+        /* reload click events for our new card */
         loadClickEvents(updatedData);
     }
     const addCardForm = document.getElementById('add-card');
