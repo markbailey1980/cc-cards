@@ -34,17 +34,54 @@ header{
 
 footer{
     background-color: #000;
-    height: 60px;
+    margin: 20px 0 0 0;
     .container{
     	@include maxWidth;
     	p{
-            line-height: 60px;
             vertical-align: middle;
     		color: $white;
             font-size: 1.2rem;
             text-align: center;
             font-weight: 700;
     	    cursor: pointer;
+            margin: 0;
+            padding: 30px 0;
+            text-decoration: underline;
+        }
+        form{
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 0 30px 0;
+            h3{
+                color: $white;
+            }
+            input{
+                display: block;
+                width: calc(100% - 30px);
+                margin: 25px 0 0 0;
+                padding: 10px 15px;
+                border: 0;
+            }
+            textarea{
+                background-color: $white;
+                width: calc(100% - 30px);
+                padding: 15px;
+                margin: 15px 0 25px;
+            }
+            span{
+                display: block;
+                display: block;
+                font-size: .7rem;
+                color: $white;
+                margin: 3px 0 0;
+            }
+            button{
+                display: block;
+                margin: 0 auto;
+                width: auto;
+                padding: 8px 15px;
+            }
         }
     }
 }

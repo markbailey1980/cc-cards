@@ -44,9 +44,7 @@ const loadData = () => {
         });
 }
 
-let loadClickEvents = (data) => {
-    console.log(data);
-
+const loadClickEvents = (data) => {
     /* toggle read more */
     let readMoreToggle = (e) => {
         let elem = e.currentTarget;
@@ -74,19 +72,38 @@ let loadClickEvents = (data) => {
         
         /* only save to local storage if this item has been toggle to favorite */
         if(closestElem.classList.contains('favorite')) {
-            console.log(index)
             setLocalStorage(index, data);
-            /* I'm passing true into the function becasue that will just reload the content and not the whole page */
-            pageLoad(true, data);
         } else {
             /* if I have time let's remove this item for local storage if we toggle off */
         }
     }
-
     let favBtn = document.getElementsByClassName('fav-btn');
     for (let i = 0; i < toggleExpand.length; i++) {
         favBtn[i].addEventListener('click', favoriteToggle);
     }
+
+    /* add card from footer form */
+    let addCustomCard = (e) => {
+        e.preventDefault();
+        console.log('add custom card');
+
+        let formData = new FormData(addCardForm);
+        let formFieldData = myObject = {
+            date: Math.random().toString(36).substring(7),
+            title: formData.get('title'),
+            url: formData.get('image'),
+            explanation: formData.get('description')
+        }
+        console.log(formFieldData);
+
+        articleTemplate(formFieldData, false);
+        let updatedData = data.slice();
+        updatedData.push(formFieldData);
+
+        loadClickEvents(updatedData);
+    }
+    const addCardForm = document.getElementById('add-card');
+    addCardForm.addEventListener("submit", addCustomCard);
 }
 
 /* set template for elements and load them into the load elements into DOM */
@@ -119,17 +136,23 @@ const articleTemplate = (data, favorite) => {
 
 /* -make our favorited item into a string and save that to local storage */
 setLocalStorage = (index, apiData) => {
-    localStorage.setItem(JSON.stringify(apiData[index].date), JSON.stringify(apiData[index]));
+    let myStorage = window.localStorage;
+    let newIndex = index - myStorage.length;
+
+    localStorage.setItem(JSON.stringify(apiData[newIndex].date), JSON.stringify(apiData[newIndex]));
 
     /* reset page content to reflect new order of items */
     newData = apiData.slice();
-    newData.splice(index, 1);
-    newData.unshift(apiData[index]);
+    newData.splice(newIndex, 1);
+    
+    /* I'm passing true into the function becasue that will just reload the content and not the whole page */
+    /* I'm also passing the date from the clicked item so I can skip that and not load it twice */
+    pageLoad(true, newData, apiData[newIndex].date);
 }
 
 
 /* when page loads check for items saved to local storage and load those first then load from the API */
-let pageLoad = (refresh, data) => { 
+let pageLoad = (refresh, data, savedItemDate) => { 
     
     if(refresh) {
         let el = document.getElementById('card-parent');
@@ -137,11 +160,12 @@ let pageLoad = (refresh, data) => {
     }
 
     let myStorage = window.localStorage;
-    if(myStorage.length > 0) {
-        /* if there's info saved in local storgat load those items first */        
+    if(myStorage.length > 0 ) {
+        /* if there's info saved in local storage load those items first */        
         let promise1 = new Promise(function(resolve, reject) {
             let arrFavs = [];
             for (let i = 0; i < myStorage.length; i++) {
+                let thisLocalItem = JSON.parse(myStorage.getItem(myStorage.key(i)));
                 arrFavs[i] = JSON.parse(myStorage.getItem(myStorage.key(i)));
             }
             arrFavs.map(item => {
@@ -153,7 +177,7 @@ let pageLoad = (refresh, data) => {
         /*  */
         promise1.then(function(value){
             if(refresh) {
-                /* this is to just refrehs the page content without page load */
+                /* this is to just refresh the page content without page load */
                 data.map(item => {
                     articleTemplate(item, false);
                 });
@@ -179,7 +203,7 @@ const clearLocalStorage = () => {
         localStorage.clear();
         let el = document.getElementById('card-parent');
         el.innerHTML = '';
-        pageLoad(false, null);
+        pageLoad(false, false, false);
     }
 }
 let clearFavs = document.getElementById('clear-favorites');
@@ -187,4 +211,4 @@ clearFavs.addEventListener('click', clearLocalStorage, false);
 
 
 /* I'm passing false into the function becasue I'm not trying to just reset page data without reload */
-pageLoad(false, null);
+pageLoad(false, false, false);

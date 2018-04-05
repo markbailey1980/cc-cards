@@ -39,7 +39,7 @@ header {
 
 footer {
   background-color: #000;
-  height: 60px; }
+  margin: 20px 0 0 0; }
   footer .container {
     max-width: 1200px;
     padding: 0 15px;
@@ -48,13 +48,44 @@ footer {
       footer .container {
         padding: 0 30px; } }
     footer .container p {
-      line-height: 60px;
       vertical-align: middle;
       color: #ffffff;
       font-size: 1.2rem;
       text-align: center;
       font-weight: 700;
-      cursor: pointer; }
+      cursor: pointer;
+      margin: 0;
+      padding: 30px 0;
+      text-decoration: underline; }
+    footer .container form {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 0 0 30px 0; }
+      footer .container form h3 {
+        color: #ffffff; }
+      footer .container form input {
+        display: block;
+        width: calc(100% - 30px);
+        margin: 25px 0 0 0;
+        padding: 10px 15px;
+        border: 0; }
+      footer .container form textarea {
+        background-color: #ffffff;
+        width: calc(100% - 30px);
+        padding: 15px;
+        margin: 15px 0 25px; }
+      footer .container form span {
+        display: block;
+        display: block;
+        font-size: .7rem;
+        color: #ffffff;
+        margin: 3px 0 0; }
+      footer .container form button {
+        display: block;
+        margin: 0 auto;
+        width: auto;
+        padding: 8px 15px; }
 
 .cards {
   min-height: calc(100vh - 120px); }
@@ -114,7 +145,7 @@ footer {
         .cards .container .card .article-content:after {
           content: '';
           position: absolute;
-          bottom: 116px;
+          bottom: 114px;
           left: 0;
           right: 0;
           width: 100%;
