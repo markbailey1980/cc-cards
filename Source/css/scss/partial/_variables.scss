@@ -1,0 +1,23 @@
+/* colors */
+$black: #000000;
+$white: #ffffff;
+$lightGrey: #efefef;
+$medGrey: #c6c6c6;
+
+/* breakpoints */
+$sm: 550px;
+$md: 768px;
+$lg: 960px;
+
+/* fonts */
+$fira: 'Fira Sans Condensed', sans-serif;
+
+/* mixins */
+@mixin maxWidth {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+    @media (min-width: $sm){
+        padding: 0 30px;
+    }
+}

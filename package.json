@@ -1,0 +1,21 @@
+{
+  "name": "cc-cards",
+  "version": "1.0.0",
+  "description": "Constant Contact Developer Exercise",
+  "scripts": {
+    "build-css": "node-sass --include-path scss Source/css/scss/styles.scss Source/css/styles.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://markbailey1980@github.com/markbailey1980/cc-cards.git"
+  },
+  "author": "Mark Bailey",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/markbailey1980/cc-cards#readme",
+  "devDependencies": {
+    "node-sass": "^4.8.3",
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {}
+}

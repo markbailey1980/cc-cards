@@ -1,0 +1,50 @@
+body{
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: $fira;
+	font-size: 14px;
+	color: $black;
+	border-sizing: border-box;
+}
+
+header{
+    background-color: #f4f4f4;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+    margin: 0 0 20px 0;
+    @media (min-width: $sm){
+        height: 80px;
+        line-height: 80px;
+    }
+    .container{
+    	@include maxWidth;
+    	h1{
+            margin: 0;
+            font-size: 6vw;
+	    	font-weight: 300;
+            text-align: center;
+            @media (min-width: $sm){
+                font-size: 2rem;
+                text-align: left;
+            }
+	    }
+    }
+}
+
+footer{
+    background-color: #000;
+    height: 60px;
+    .container{
+    	@include maxWidth;
+    	p{
+            line-height: 60px;
+            vertical-align: middle;
+    		color: $white;
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+    	    cursor: pointer;
+        }
+    }
+}
